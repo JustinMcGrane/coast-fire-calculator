@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import SiteHeader from "@/components/SiteHeader";
@@ -43,6 +43,10 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0a1c2b",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
