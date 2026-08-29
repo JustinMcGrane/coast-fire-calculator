@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Hero from "@/components/Hero";
 import CoastCalculator from "@/components/CoastCalculator";
 import Faq from "@/components/Faq";
@@ -90,6 +91,12 @@ export default async function HomePage() {
           to retirement, and a &quot;coast plan&quot; where you contribute only until your coast point,
           then let compounding do the rest. Both should land at or above your retirement target — the
           coast plan just gets you there with less required from your future self.
+        </p>
+        <h3>Not coasting — want your full FIRE number instead?</h3>
+        <p>
+          If you want to know the age you reach full financial independence at your{" "}
+          <em>current</em> contribution rate — rather than what you&apos;d need today to stop
+          contributing — see our <Link href="/fire-calculator">FIRE calculator</Link>.
         </p>
       </div>
 

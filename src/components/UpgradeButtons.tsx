@@ -20,10 +20,10 @@ export default function UpgradeButtons() {
   return (
     <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
       <button className="primary" onClick={() => upgrade("monthly")} disabled={loading !== null}>
-        {loading === "monthly" ? "Redirecting…" : "Upgrade — $9/mo"}
+        {loading === "monthly" ? "Redirecting…" : "Upgrade — $8/mo"}
       </button>
       <button className="ghost" onClick={() => upgrade("yearly")} disabled={loading !== null}>
-        {loading === "yearly" ? "Redirecting…" : "Upgrade — $79/yr"}
+        {loading === "yearly" ? "Redirecting…" : "Upgrade — $69/yr"}
       </button>
     </div>
   );

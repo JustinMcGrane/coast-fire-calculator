@@ -16,6 +16,8 @@ export default async function SiteHeader() {
       <nav className="site-nav">
         <Link href="/coast-fire-number">Coast number</Link>
         <Link href="/coast-fire-calculator-retirement">Near retirement</Link>
+        <Link href="/fire-calculator">FIRE calculator</Link>
+        <Link href="/how-long-will-my-money-last">Savings longevity</Link>
         <Link href="/pricing">Premium</Link>
         {user ? (
           <>

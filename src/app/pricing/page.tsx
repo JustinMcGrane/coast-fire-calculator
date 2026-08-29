@@ -41,7 +41,7 @@ export default async function PricingPage() {
         </div>
         <div className="results-panel">
           <div className="section-title">Premium</div>
-          <p className="section-sub">$9/mo or $79/yr</p>
+          <p className="section-sub">$8/mo or $69/yr</p>
           <ul style={{ color: "var(--text)", fontSize: 14, lineHeight: 2, paddingLeft: 18 }}>
             <li>Unlimited saved scenarios, compared side by side</li>
             <li>Net worth check-ins: actual vs. projected over time</li>

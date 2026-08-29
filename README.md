@@ -36,7 +36,7 @@ npm run dev
 
 ### 2. Stripe
 
-1. Create two recurring Prices under one Product: $9/mo and $79/yr.
+1. Create two recurring Prices under one Product: $8/mo and $69/yr.
 2. Put their IDs in `NEXT_PUBLIC_STRIPE_PRICE_ID_MONTHLY` / `_YEARLY`.
 3. Add a webhook endpoint pointing at `https://yourdomain.com/api/stripe/webhook`, listening for
    `checkout.session.completed`, `customer.subscription.created`, `customer.subscription.updated`,

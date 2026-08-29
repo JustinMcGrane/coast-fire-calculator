@@ -119,6 +119,123 @@ export function project(vals: CoastInputs): CoastResult {
   };
 }
 
+export interface FiInputs {
+  currentAge: number;
+  currentSavings: number;
+  monthlyContribution: number;
+  annualReturn: number;
+  desiredSpending: number;
+  swr: number;
+}
+
+export interface FiResult {
+  retirementNumber: number;
+  fiAgeYears: number | null;
+  yearsToFI: number | null;
+  series: SeriesPoint[];
+  alreadyFI: boolean;
+}
+
+export const DEFAULT_FI_INPUTS: FiInputs = {
+  currentAge: 30,
+  currentSavings: 65000,
+  monthlyContribution: 1800,
+  annualReturn: 7,
+  desiredSpending: 60000,
+  swr: 4,
+};
+
+const FI_MAX_YEARS = 60;
+
+// Answers a different question than project(): not "what do I need today to
+// coast," but "at my current savings rate, when do I hit full FI?" — no
+// target retirement age input, since the age is the output here.
+export function projectFI(vals: FiInputs): FiResult {
+  const { currentAge, currentSavings, monthlyContribution, annualReturn, desiredSpending, swr } = vals;
+  const retirementNumber = swr > 0 ? desiredSpending / (swr / 100) : 0;
+  const monthlyRate = Math.pow(1 + annualReturn / 100, 1 / 12) - 1;
+  const maxMonths = FI_MAX_YEARS * 12;
+
+  const alreadyFI = currentSavings >= retirementNumber;
+  let balance = currentSavings;
+  let fiMonth: number | null = alreadyFI ? 0 : null;
+  const series: SeriesPoint[] = [{ age: currentAge, value: balance }];
+
+  for (let m = 1; m <= maxMonths; m++) {
+    balance = balance * (1 + monthlyRate) + monthlyContribution;
+    if (fiMonth === null && balance >= retirementNumber) {
+      fiMonth = m;
+    }
+    if (m % 12 === 0) {
+      series.push({ age: currentAge + m / 12, value: balance });
+      if (fiMonth !== null) break;
+    }
+  }
+
+  return {
+    retirementNumber,
+    fiAgeYears: fiMonth !== null ? currentAge + fiMonth / 12 : null,
+    yearsToFI: fiMonth !== null ? fiMonth / 12 : null,
+    series,
+    alreadyFI,
+  };
+}
+
+export interface LongevityInputs {
+  currentAge: number;
+  currentSavings: number;
+  annualWithdrawal: number;
+  annualReturn: number;
+}
+
+export interface LongevityResult {
+  yearsLasting: number | null;
+  ageMoneyRunsOut: number | null;
+  series: SeriesPoint[];
+  lastsIndefinitely: boolean;
+}
+
+export const DEFAULT_LONGEVITY_INPUTS: LongevityInputs = {
+  currentAge: 60,
+  currentSavings: 1000000,
+  annualWithdrawal: 45000,
+  annualReturn: 5,
+};
+
+const LONGEVITY_MAX_YEARS = 60;
+
+// The inverse question from projectFI(): given a starting balance and a fixed
+// withdrawal, how long does it last (rather than how long to reach a target)?
+export function projectLongevity(vals: LongevityInputs): LongevityResult {
+  const { currentAge, currentSavings, annualWithdrawal, annualReturn } = vals;
+  const monthlyRate = Math.pow(1 + annualReturn / 100, 1 / 12) - 1;
+  const monthlyWithdrawal = annualWithdrawal / 12;
+  const maxMonths = LONGEVITY_MAX_YEARS * 12;
+
+  let balance = currentSavings;
+  let depletionMonth: number | null = balance <= 0 ? 0 : null;
+  const series: SeriesPoint[] = [{ age: currentAge, value: balance }];
+
+  for (let m = 1; m <= maxMonths; m++) {
+    balance = balance * (1 + monthlyRate) - monthlyWithdrawal;
+    if (balance <= 0 && depletionMonth === null) {
+      depletionMonth = m;
+      balance = 0;
+    }
+    if (m % 12 === 0) {
+      series.push({ age: currentAge + m / 12, value: Math.max(balance, 0) });
+      if (depletionMonth !== null) break;
+    }
+  }
+
+  return {
+    yearsLasting: depletionMonth !== null ? depletionMonth / 12 : null,
+    ageMoneyRunsOut: depletionMonth !== null ? currentAge + depletionMonth / 12 : null,
+    series,
+    lastsIndefinitely: depletionMonth === null,
+  };
+}
+
 export const fmtUSD = (n: number) => "$" + Math.round(n).toLocaleString("en-US");
 
 export const fmtUSDShort = (n: number) => {
