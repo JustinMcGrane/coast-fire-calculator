@@ -23,10 +23,12 @@ npm run dev
 
 ### 1. Supabase
 
-1. Create a project at [supabase.com](https://supabase.com).
+1. Create a project at [supabase.com](https://supabase.com). On the creation screen, under
+   **Security**, you can safely uncheck **"Automatically expose new tables"** — the migration below
+   grants exactly the privileges each role needs explicitly, so it doesn't depend on that default.
 2. Run `supabase/migrations/0001_init.sql` in the SQL editor (or via `supabase db push` if you use
-   the CLI) — creates `scenarios`, `net_worth_checkins`, `subscription_status`, RLS policies, and a
-   trigger that gives every new user a `free` subscription row.
+   the CLI) — creates `scenarios`, `net_worth_checkins`, `subscription_status`, their RLS policies
+   and explicit grants, and a trigger that gives every new user a `free` subscription row.
 3. Auth → Providers: enable **Email** (magic link is used, no password) and **Google**.
 4. Auth → URL Configuration: add `http://localhost:3000/auth/callback` and your production
    `https://yourdomain.com/auth/callback` as redirect URLs.

@@ -3,6 +3,11 @@
 
 create extension if not exists "pgcrypto";
 
+-- Belt-and-suspenders: Supabase grants this by default, but keep the migration
+-- self-contained regardless of the "Automatically expose new tables" project
+-- setting (which only auto-grants table privileges, not schema usage).
+grant usage on schema public to authenticated, service_role;
+
 -- ---------------------------------------------------------------------------
 -- subscription_status: one row per user, synced from Stripe webhooks.
 -- ---------------------------------------------------------------------------
@@ -24,6 +29,12 @@ create policy "users can read their own subscription status"
 
 -- No insert/update/delete policies for regular users: subscription_status is
 -- only ever written by the Stripe webhook handler using the service role key.
+
+-- Explicit grants (required with "Automatically expose new tables" disabled):
+-- authenticated can only ever read this table; the webhook (service_role,
+-- bypasses RLS) is the only writer.
+grant select on public.subscription_status to authenticated;
+grant select, insert, update, delete on public.subscription_status to service_role;
 
 -- ---------------------------------------------------------------------------
 -- scenarios: saved calculator inputs + the computed coast number.
@@ -58,6 +69,12 @@ create policy "users can update their own scenarios"
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
 
+-- Explicit grants: authenticated does full CRUD (via the API routes, which
+-- enforce ownership + the free-tier limit); service_role only reads, for the
+-- reminder cron job.
+grant select, insert, update, delete on public.scenarios to authenticated;
+grant select on public.scenarios to service_role;
+
 -- ---------------------------------------------------------------------------
 -- net_worth_checkins: manual periodic balance entries tied to a scenario,
 -- used to plot actual-vs-projected (premium feature).
@@ -87,6 +104,12 @@ create policy "users can insert their own checkins"
 create policy "users can delete their own checkins"
   on public.net_worth_checkins for delete
   using (auth.uid() = user_id);
+
+-- Explicit grants: authenticated can add/read/remove their own check-ins
+-- (no update policy exists — check-ins are immutable entries); service_role
+-- only reads, for the reminder cron job.
+grant select, insert, delete on public.net_worth_checkins to authenticated;
+grant select on public.net_worth_checkins to service_role;
 
 -- ---------------------------------------------------------------------------
 -- Keep a subscription_status row present for every new user (defaults to 'free').
