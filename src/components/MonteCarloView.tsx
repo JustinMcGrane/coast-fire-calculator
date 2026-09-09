@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { project } from "@/lib/coastfire";
-import { runMonteCarlo } from "@/lib/montecarlo";
+import { runMonteCarlo, SequenceRiskResult } from "@/lib/montecarlo";
 import { drawMonteCarloBand } from "@/lib/chartExtra";
 import { ScenarioRow } from "@/lib/types";
 
@@ -10,6 +10,7 @@ export default function MonteCarloView({ scenarios }: { scenarios: ScenarioRow[]
   const [scenarioId, setScenarioId] = useState(scenarios[0]?.id);
   const [stdDev, setStdDev] = useState(15);
   const [probability, setProbability] = useState<number | null>(null);
+  const [sequenceRisk, setSequenceRisk] = useState<SequenceRiskResult | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const scenario = scenarios.find((s) => s.id === scenarioId);
@@ -19,6 +20,7 @@ export default function MonteCarloView({ scenarios }: { scenarios: ScenarioRow[]
     const result = project(scenario.inputs);
     const mc = runMonteCarlo(scenario.inputs, result.coastAgeMonths, result.retirementNumber, 500, stdDev);
     setProbability(mc.probabilityOfSuccess);
+    setSequenceRisk(mc.sequenceRisk);
     drawMonteCarloBand(canvasRef.current, mc.contributing, result.retirementNumber);
   }, [scenario, stdDev]);
 
@@ -102,6 +104,29 @@ export default function MonteCarloView({ scenarios }: { scenarios: ScenarioRow[]
           Across 500 simulated return paths, staying the full contribution course reached your
           retirement target in <strong>{probability.toFixed(0)}%</strong> of runs.
         </p>
+      )}
+
+      {sequenceRisk && (
+        <div style={{ marginTop: 24, paddingTop: 20, borderTop: "1px solid var(--line)" }}>
+          <div className="section-title" style={{ fontSize: 16 }}>
+            Sequence-of-returns risk
+          </div>
+          <p className="section-sub">
+            A market downturn hits differently depending on when it happens. Once you stop
+            contributing at your coast point, there&apos;s no more buffer to average through a bad
+            stretch — so a weak run of returns in the first 5 years after coasting matters more than
+            the same weak years would earlier on.
+          </p>
+          <p className="status-copy" style={{ marginBottom: 0 }}>
+            Across your simulated coast plans: when the first 5 post-coast years land in the{" "}
+            <strong>weakest third</strong> of simulated outcomes, you still reach your retirement
+            number in <strong>{sequenceRisk.badSequenceSuccessRate.toFixed(0)}%</strong> of those
+            runs — versus <strong>{sequenceRisk.goodSequenceSuccessRate.toFixed(0)}%</strong> when
+            those years land in the <strong>strongest third</strong>, and{" "}
+            <strong>{sequenceRisk.overallSuccessRate.toFixed(0)}%</strong> across all coast-plan runs
+            overall.
+          </p>
+        </div>
       )}
     </div>
   );
