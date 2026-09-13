@@ -5,6 +5,7 @@ import { getIsPremium } from "@/lib/subscription";
 import ScenarioComparison from "@/components/ScenarioComparison";
 import NetWorthTracker from "@/components/NetWorthTracker";
 import MonteCarloView from "@/components/MonteCarloView";
+import ReportExport from "@/components/ReportExport";
 import ManageBillingButton from "@/components/ManageBillingButton";
 import UpgradeButtons from "@/components/UpgradeButtons";
 import Link from "next/link";
@@ -60,6 +61,7 @@ export default async function DashboardPage() {
           <ScenarioComparison scenarios={scenarios} />
           <NetWorthTracker scenarios={scenarios} />
           <MonteCarloView scenarios={scenarios} />
+          <ReportExport scenarios={scenarios} />
         </>
       ) : (
         <div className="saved-list">
