@@ -7,6 +7,7 @@ export default function SiteFooter() {
       <span style={{ display: "flex", gap: "16px" }}>
         <Link href="/coast-fire-number">Coast number</Link>
         <Link href="/coast-fire-calculator-retirement">Retirement</Link>
+        <Link href="/barista-fire-calculator">Barista FIRE</Link>
         <Link href="/pricing">Premium</Link>
       </span>
     </footer>

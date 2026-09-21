@@ -236,6 +236,74 @@ export function projectLongevity(vals: LongevityInputs): LongevityResult {
   };
 }
 
+export interface BaristaInputs {
+  currentAge: number;
+  retireAge: number;
+  currentSavings: number;
+  annualWithdrawal: number;
+  annualReturn: number;
+  desiredSpending: number;
+  swr: number;
+}
+
+export interface BaristaResult {
+  retirementNumber: number;
+  projectedBalanceAtRetirement: number;
+  meetsTarget: boolean;
+  series: SeriesPoint[];
+  depletesBeforeRetirement: boolean;
+  depletionAge: number | null;
+}
+
+export const DEFAULT_BARISTA_INPUTS: BaristaInputs = {
+  currentAge: 35,
+  retireAge: 60,
+  currentSavings: 300000,
+  annualWithdrawal: 15000,
+  annualReturn: 7,
+  desiredSpending: 60000,
+  swr: 4,
+};
+
+// A distinct question from both project() and projectLongevity(): you're not
+// contributing anymore, but you're not living off savings entirely either —
+// part-time ("barista") income covers most expenses, and you withdraw only
+// the gap each year. Does the balance still hit your full retirement number
+// by a fixed target age, and does it survive that long at all?
+export function projectBarista(vals: BaristaInputs): BaristaResult {
+  const { currentAge, retireAge, currentSavings, annualWithdrawal, annualReturn, desiredSpending, swr } =
+    vals;
+  const retirementNumber = swr > 0 ? desiredSpending / (swr / 100) : 0;
+  const yearsToRetire = Math.max(retireAge - currentAge, 0);
+  const totalMonths = Math.round(yearsToRetire * 12);
+  const monthlyRate = Math.pow(1 + annualReturn / 100, 1 / 12) - 1;
+  const monthlyWithdrawal = annualWithdrawal / 12;
+
+  let balance = currentSavings;
+  let depletionMonth: number | null = balance <= 0 ? 0 : null;
+  const series: SeriesPoint[] = [{ age: currentAge, value: balance }];
+
+  for (let m = 1; m <= totalMonths; m++) {
+    balance = balance * (1 + monthlyRate) - monthlyWithdrawal;
+    if (balance <= 0 && depletionMonth === null) {
+      depletionMonth = m;
+      balance = 0;
+    }
+    if (m % 12 === 0 || m === totalMonths) {
+      series.push({ age: currentAge + m / 12, value: Math.max(balance, 0) });
+    }
+  }
+
+  return {
+    retirementNumber,
+    projectedBalanceAtRetirement: Math.max(balance, 0),
+    meetsTarget: balance >= retirementNumber,
+    series,
+    depletesBeforeRetirement: depletionMonth !== null,
+    depletionAge: depletionMonth !== null ? currentAge + depletionMonth / 12 : null,
+  };
+}
+
 export const fmtUSD = (n: number) => "$" + Math.round(n).toLocaleString("en-US");
 
 export const fmtUSDShort = (n: number) => {

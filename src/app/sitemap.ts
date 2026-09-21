@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/coast-fire-calculator-retirement",
     "/fire-calculator",
     "/how-long-will-my-money-last",
+    "/barista-fire-calculator",
     "/pricing",
   ];
 

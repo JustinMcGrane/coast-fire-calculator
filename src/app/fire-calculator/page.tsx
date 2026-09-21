@@ -83,7 +83,9 @@ export default function FireCalculatorPage() {
           <Link href="/">Coast FIRE calculator</Link>, or the{" "}
           <Link href="/coast-fire-calculator-retirement">near-retirement edition</Link> if you&apos;re
           within a decade or two of retiring. Already retired and drawing down savings instead? See{" "}
-          <Link href="/how-long-will-my-money-last">how long your money will last</Link>.
+          <Link href="/how-long-will-my-money-last">how long your money will last</Link>. Planning to
+          downshift to part-time work along the way? See our{" "}
+          <Link href="/barista-fire-calculator">Barista FIRE calculator</Link>.
         </p>
       </div>
 
