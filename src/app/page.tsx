@@ -9,12 +9,12 @@ import { createClient } from "@/lib/supabase/server";
 export const metadata: Metadata = {
   title: "Coast FIRE Calculator — Find Your Coast FIRE Number",
   description:
-    "Free coast fire calculator (also known as a coastfire or coast FI calculator): find the exact amount you need invested today to coast to retirement, with a chart showing your coast point.",
+    "Free coast fire calculator — no signup needed. Instantly see your coast number, coast age, and a chart comparing full contributions vs. coasting.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Coast FIRE Calculator — Find Your Coast FIRE Number",
     description:
-      "Find the exact amount you need invested today to coast to retirement — no more contributions required.",
+      "Free, no signup needed — find the exact amount you need invested today to coast to retirement.",
     url: "/",
   },
 };

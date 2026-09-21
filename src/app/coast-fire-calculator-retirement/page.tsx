@@ -9,12 +9,12 @@ import { CoastInputs } from "@/lib/coastfire";
 export const metadata: Metadata = {
   title: "Coast Fire Calculator for Retirement — Near-Retirement Edition",
   description:
-    "A coast fire retirement calculator for those within a decade or two of retiring: see whether your current savings can coast the rest of the way, or how much longer you'd need to contribute.",
+    "Free coast fire calculator for near-retirement — no signup needed. See if your savings can already coast to retirement, or how much more you need.",
   alternates: { canonical: "/coast-fire-calculator-retirement" },
   openGraph: {
     title: "Coast Fire Calculator for Retirement",
     description:
-      "See whether your current savings can coast to retirement without further contributions.",
+      "Free, no signup needed — see whether your current savings can coast to retirement.",
     url: "/coast-fire-calculator-retirement",
   },
 };

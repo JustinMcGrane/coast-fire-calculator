@@ -9,11 +9,11 @@ import { fmtUSD } from "@/lib/coastfire";
 export const metadata: Metadata = {
   title: "Coast Fire Number Calculator — Calculate Your Coast Fire Number",
   description:
-    "Calculate your coast fire number: the exact dollar amount you need invested today to coast, untouched, to your retirement target. Worked example included.",
+    "Free coast fire number calculator — no signup needed. Find the exact dollar amount you need invested today to coast to retirement, with a worked example.",
   alternates: { canonical: "/coast-fire-number" },
   openGraph: {
     title: "Coast Fire Number Calculator",
-    description: "Calculate the exact dollar amount you need invested today to coast to retirement.",
+    description: "Free, no signup needed — calculate the exact amount you need invested today to coast to retirement.",
     url: "/coast-fire-number",
   },
 };

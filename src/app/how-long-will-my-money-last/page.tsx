@@ -9,12 +9,12 @@ import { fmtUSD } from "@/lib/coastfire";
 export const metadata: Metadata = {
   title: "How Long Will My Money Last? — Retirement Savings Calculator",
   description:
-    "Free calculator: see exactly how long your retirement savings will last given your withdrawal amount and expected return, with a chart of your balance over time.",
+    "Free calculator — no signup needed. See exactly how long your retirement savings will last, with a chart of your balance over time.",
   alternates: { canonical: "/how-long-will-my-money-last" },
   openGraph: {
     title: "How Long Will My Money Last? — Retirement Savings Calculator",
     description:
-      "See exactly how long your retirement savings will last given your withdrawal amount and expected return.",
+      "Free, no signup needed — see exactly how long your retirement savings will last.",
     url: "/how-long-will-my-money-last",
   },
 };

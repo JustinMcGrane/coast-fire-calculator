@@ -9,12 +9,12 @@ import { fmtUSD } from "@/lib/coastfire";
 export const metadata: Metadata = {
   title: "FIRE Calculator — Find Your Financial Independence Number",
   description:
-    "Free FIRE calculator: find the age you reach financial independence at your current savings rate, and the exact number you need invested to get there.",
+    "Free FIRE calculator — no signup needed. Instantly find the age you reach financial independence and the exact number you need invested to get there.",
   alternates: { canonical: "/fire-calculator" },
   openGraph: {
     title: "FIRE Calculator — Find Your Financial Independence Number",
     description:
-      "Find the age you reach financial independence at your current savings rate, and the number you need invested to get there.",
+      "Free, no signup needed — find the age you reach financial independence at your current savings rate.",
     url: "/fire-calculator",
   },
 };
