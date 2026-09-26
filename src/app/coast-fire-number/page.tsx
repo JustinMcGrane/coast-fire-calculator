@@ -63,9 +63,11 @@ export default async function CoastFireNumberPage() {
       <div className="content-section">
         <h2>How to calculate your coast fire number</h2>
         <p>
-          Your coast fire number comes from two steps. First, find your{" "}
-          <strong>retirement number</strong> — desired annual spending divided by your safe
-          withdrawal rate. Second, discount that number back to today using your expected annual
+          Your coast fire number is the exact dollar amount you need invested today — with no
+          further contributions — for compound growth alone to carry it to your full retirement
+          number by your target retirement age. It comes from two steps: first find your{" "}
+          <strong>retirement number</strong> (desired annual spending divided by your safe
+          withdrawal rate), then discount that number back to today using your expected annual
           return, compounded over the years remaining until retirement.
         </p>
         <h3>Worked example</h3>

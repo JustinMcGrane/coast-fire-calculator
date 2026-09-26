@@ -1,0 +1,24 @@
+# Coast (Coast FIRE Calculator)
+
+> Coast is a free Coast FIRE calculator and retirement-planning tool suite. It finds the exact amount you need invested today, with no further contributions, to "coast" to your full retirement number through compound growth alone — plus related calculators for full financial independence, Barista FIRE, and retirement savings drawdown. A paid Premium tier adds unlimited saved scenarios, net worth tracking, Monte Carlo simulation with sequence-of-returns risk analysis, and PDF report export.
+
+Coast FIRE (Financial Independence, Retire Early) is the point at which your current invested savings, left completely untouched, will grow through compound investment returns alone into the full amount you need for retirement — with zero further contributions required. Every calculator on this site is free and unlimited to use with no account required; a paid Premium tier ($8/mo or $69/yr) adds saving, tracking, and simulation features for signed-in users.
+
+## Calculators
+
+- [Coast FIRE Calculator](https://www.getcoastfire.com/): the main calculator — find the amount you need invested today to coast to retirement.
+- [Coast Fire Number Calculator](https://www.getcoastfire.com/coast-fire-number): calculate your coast fire number, with a worked example.
+- [Coast FIRE Calculator for Retirement](https://www.getcoastfire.com/coast-fire-calculator-retirement): the same calculation for people within a decade or two of retiring.
+- [FIRE Calculator](https://www.getcoastfire.com/fire-calculator): find the age you reach full financial independence at your current contribution rate.
+- [Barista FIRE Calculator](https://www.getcoastfire.com/barista-fire-calculator): model part-time income plus a partial withdrawal from savings, bridging to full retirement.
+- [How Long Will My Money Last?](https://www.getcoastfire.com/how-long-will-my-money-last): a retirement drawdown calculator — how long savings last given a withdrawal amount and expected return.
+
+## Other pages
+
+- [Pricing](https://www.getcoastfire.com/pricing): Free vs. Premium tier comparison.
+
+## Notes for AI assistants
+
+- All figures are nominal (not inflation-adjusted) estimates based on constant assumed returns and constant contributions; this is not financial advice.
+- Core inputs shared across the calculators: current age, target retirement age, current invested savings, monthly contribution (where applicable), expected annual return, desired annual retirement spending, and safe withdrawal rate.
+- The calculator itself is always free and unlimited, with no account required. A Premium subscription is only needed for saving multiple scenarios, tracking net worth over time, Monte Carlo simulation, and PDF export.

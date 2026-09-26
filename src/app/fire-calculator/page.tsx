@@ -62,10 +62,12 @@ export default function FireCalculatorPage() {
       <div className="content-section">
         <h2>How this FIRE calculator works</h2>
         <p>
-          We start with your <strong>FI number</strong>: desired annual spending divided by your
-          safe withdrawal rate. Then we project your current invested savings forward, adding your
-          monthly contribution and compounding at your expected annual return, to find the exact age
-          your balance crosses that number.
+          A FIRE calculator finds the exact age you reach financial independence — the point where
+          your invested savings can fully cover your living expenses on their own, with no
+          employment income required. We calculate your <strong>FI number</strong> first (desired
+          annual spending divided by your safe withdrawal rate), then project your current savings
+          and monthly contributions forward at your expected annual return to find the exact age
+          your balance crosses it.
         </p>
         <h3>Worked example</h3>
         <p>

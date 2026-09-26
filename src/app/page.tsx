@@ -71,11 +71,12 @@ export default async function HomePage() {
       <div className="content-section">
         <h2>What is Coast FIRE?</h2>
         <p>
-          Coast FIRE (Financial Independence, Retire Early) is the point at which your current
-          invested savings, left completely alone, will compound into your full retirement number by
-          your target retirement age — with no further contributions. Reach it, and every dollar you
-          were putting toward retirement is now free for today: you only need to earn enough to cover
-          current living expenses.
+          Coast FIRE is the point at which your current retirement savings, left completely
+          untouched, will grow through compound investment returns alone into the full amount you
+          need by your target retirement age — with zero further contributions required. Once you
+          reach it, you can stop saving for retirement entirely and simply cover your everyday living
+          expenses, since your existing investments are already on track to finish the job. This
+          calculator finds that exact dollar amount for you instantly.
         </p>
         <h3>How your coast number is calculated</h3>
         <p>
