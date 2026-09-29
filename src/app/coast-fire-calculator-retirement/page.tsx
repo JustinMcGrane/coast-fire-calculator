@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import CoastCalculator from "@/components/CoastCalculator";
 import Faq from "@/components/Faq";
-import WebApplicationSchema from "@/components/WebApplicationSchema";
 import { createClient } from "@/lib/supabase/server";
 import { CoastInputs } from "@/lib/coastfire";
 
@@ -86,12 +85,6 @@ export default async function CoastFireRetirementPage() {
       </div>
 
       <Faq items={faqItems} />
-
-      <WebApplicationSchema
-        name="Coast Fire Calculator for Retirement"
-        description="Coast FIRE calculator angled for users within a decade or two of retirement."
-        url="/coast-fire-calculator-retirement"
-      />
     </>
   );
 }

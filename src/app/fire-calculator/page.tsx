@@ -3,7 +3,6 @@ import Link from "next/link";
 import Hero from "@/components/Hero";
 import FireCalculator from "@/components/FireCalculator";
 import Faq from "@/components/Faq";
-import WebApplicationSchema from "@/components/WebApplicationSchema";
 import { fmtUSD } from "@/lib/coastfire";
 
 export const metadata: Metadata = {
@@ -92,12 +91,6 @@ export default function FireCalculatorPage() {
       </div>
 
       <Faq items={faqItems} />
-
-      <WebApplicationSchema
-        name="FIRE Calculator"
-        description="Free FIRE calculator — find the age you reach financial independence at your current savings rate."
-        url="/fire-calculator"
-      />
     </>
   );
 }

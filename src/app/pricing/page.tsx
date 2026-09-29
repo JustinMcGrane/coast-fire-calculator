@@ -21,7 +21,7 @@ export default async function PricingPage() {
   return (
     <div className="wrap" style={{ paddingTop: 48 }}>
       <div className="content-section" style={{ margin: "0 auto 40px", textAlign: "center" }}>
-        <h2>Coast FIRE Premium</h2>
+        <h1>Coast FIRE Premium</h1>
         <p>
           The calculator itself is free forever, no account required. Premium adds the tools for
           tracking your plan over time and seeing a realistic range of outcomes instead of one

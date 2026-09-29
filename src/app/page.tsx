@@ -3,7 +3,6 @@ import Link from "next/link";
 import Hero from "@/components/Hero";
 import CoastCalculator from "@/components/CoastCalculator";
 import Faq from "@/components/Faq";
-import WebApplicationSchema from "@/components/WebApplicationSchema";
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
@@ -102,12 +101,6 @@ export default async function HomePage() {
       </div>
 
       <Faq items={faqItems} />
-
-      <WebApplicationSchema
-        name="Coast FIRE Calculator"
-        description="Free calculator for finding your Coast FIRE number — the amount you need invested today to coast to retirement."
-        url="/"
-      />
     </>
   );
 }

@@ -3,7 +3,6 @@ import Link from "next/link";
 import Hero from "@/components/Hero";
 import BaristaCalculator from "@/components/BaristaCalculator";
 import Faq from "@/components/Faq";
-import WebApplicationSchema from "@/components/WebApplicationSchema";
 import { fmtUSD } from "@/lib/coastfire";
 
 export const metadata: Metadata = {
@@ -83,12 +82,6 @@ export default function BaristaFireCalculatorPage() {
       </div>
 
       <Faq items={faqItems} />
-
-      <WebApplicationSchema
-        name="Barista FIRE Calculator"
-        description="Free calculator for Barista FIRE — bridging part-time income and partial savings withdrawal to full retirement."
-        url="/barista-fire-calculator"
-      />
     </>
   );
 }

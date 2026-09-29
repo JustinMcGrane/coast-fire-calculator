@@ -3,7 +3,6 @@ import Link from "next/link";
 import Hero from "@/components/Hero";
 import LongevityCalculator from "@/components/LongevityCalculator";
 import Faq from "@/components/Faq";
-import WebApplicationSchema from "@/components/WebApplicationSchema";
 import { fmtUSD } from "@/lib/coastfire";
 
 export const metadata: Metadata = {
@@ -79,12 +78,6 @@ export default function HowLongWillMyMoneyLastPage() {
       </div>
 
       <Faq items={faqItems} />
-
-      <WebApplicationSchema
-        name="Retirement Savings Longevity Calculator"
-        description="Free calculator for how long retirement savings will last given a withdrawal amount and expected return."
-        url="/how-long-will-my-money-last"
-      />
     </>
   );
 }
