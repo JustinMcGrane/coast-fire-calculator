@@ -3,6 +3,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { DEFAULT_FI_INPUTS, FiInputs, fmtUSD, projectFI } from "@/lib/coastfire";
 import { drawFireChart } from "@/lib/chart";
+import { ScenarioRow } from "@/lib/types";
+import { useScenarioSave } from "@/lib/useScenarioSave";
+import { ScenarioSaveRow, SavedScenariosList } from "@/components/ScenarioSaveBlock";
+import { formatHeadline } from "@/lib/scenarioDisplay";
 
 const FIELD_DEFS: {
   key: keyof FiInputs;
@@ -23,13 +27,31 @@ const FIELD_DEFS: {
 
 export default function FireCalculator({
   initialInputs = DEFAULT_FI_INPUTS,
+  isSignedIn = false,
 }: {
   initialInputs?: FiInputs;
+  isSignedIn?: boolean;
 }) {
   const [vals, setVals] = useState<FiInputs>(initialInputs);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const result = useMemo(() => projectFI(vals), [vals]);
+
+  const {
+    scenarioName,
+    setScenarioName,
+    saveState,
+    saveError,
+    saved,
+    loadingSaved,
+    handleSave,
+    handleDelete,
+  } = useScenarioSave({
+    calculatorType: "fire",
+    isSignedIn,
+    inputs: vals,
+    headlineValue: result.fiAgeYears,
+  });
 
   useEffect(() => {
     if (canvasRef.current) drawFireChart(canvasRef.current, result, vals.currentAge);
@@ -43,6 +65,12 @@ export default function FireCalculator({
   function updateField(key: keyof FiInputs, raw: string) {
     const parsed = parseFloat(raw);
     setVals((prev) => ({ ...prev, [key]: Number.isNaN(parsed) ? 0 : parsed }));
+  }
+
+  function handleLoad(scenario: ScenarioRow) {
+    setVals(scenario.inputs as FiInputs);
+    setScenarioName(scenario.name);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   let statusClass = "pending";
@@ -145,8 +173,26 @@ export default function FireCalculator({
               FI number
             </div>
           </div>
+
+          <ScenarioSaveRow
+            isSignedIn={isSignedIn}
+            scenarioName={scenarioName}
+            setScenarioName={setScenarioName}
+            saveState={saveState}
+            saveError={saveError}
+            onSave={handleSave}
+          />
         </div>
       </div>
+
+      <SavedScenariosList
+        isSignedIn={isSignedIn}
+        saved={saved}
+        loadingSaved={loadingSaved}
+        formatMeta={formatHeadline}
+        onLoad={handleLoad}
+        onDelete={handleDelete}
+      />
 
       <p className="foot-note">
         Estimates only, based on a constant annual return and constant contributions — real markets

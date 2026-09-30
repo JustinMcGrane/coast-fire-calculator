@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import FireCalculator from "@/components/FireCalculator";
 import Faq from "@/components/Faq";
 import { fmtUSD } from "@/lib/coastfire";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "FIRE Calculator — Find Your Financial Independence Number",
@@ -46,7 +47,12 @@ const faqItems = [
   },
 ];
 
-export default function FireCalculatorPage() {
+export default async function FireCalculatorPage() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <>
       <Hero
@@ -56,7 +62,7 @@ export default function FireCalculatorPage() {
         suffix=" number."
         subhead="See the age you reach financial independence at your current savings rate, and the exact number you need invested to get there. Free, unlimited, no account required."
       />
-      <FireCalculator />
+      <FireCalculator isSignedIn={!!user} />
 
       <div className="content-section">
         <h2>How this FIRE calculator works</h2>

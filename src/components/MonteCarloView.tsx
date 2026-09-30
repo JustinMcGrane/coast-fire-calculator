@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { project } from "@/lib/coastfire";
 import { runMonteCarlo, SequenceRiskResult } from "@/lib/montecarlo";
 import { drawMonteCarloBand } from "@/lib/chartExtra";
-import { ScenarioRow } from "@/lib/types";
+import { CoastScenarioRow } from "@/lib/types";
 
-export default function MonteCarloView({ scenarios }: { scenarios: ScenarioRow[] }) {
+export default function MonteCarloView({ scenarios }: { scenarios: CoastScenarioRow[] }) {
   const [scenarioId, setScenarioId] = useState(scenarios[0]?.id);
   const [stdDev, setStdDev] = useState(15);
   const [probability, setProbability] = useState<number | null>(null);

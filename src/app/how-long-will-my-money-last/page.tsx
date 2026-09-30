@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import LongevityCalculator from "@/components/LongevityCalculator";
 import Faq from "@/components/Faq";
 import { fmtUSD } from "@/lib/coastfire";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "How Long Will My Money Last? — Retirement Savings Calculator",
@@ -41,7 +42,12 @@ const faqItems = [
   },
 ];
 
-export default function HowLongWillMyMoneyLastPage() {
+export default async function HowLongWillMyMoneyLastPage() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <>
       <Hero
@@ -51,7 +57,7 @@ export default function HowLongWillMyMoneyLastPage() {
         suffix=""
         subhead="See exactly how long your retirement savings will last, given your withdrawal amount and expected return — with a chart showing your balance over time."
       />
-      <LongevityCalculator />
+      <LongevityCalculator isSignedIn={!!user} />
 
       <div className="content-section">
         <h2>How this calculator works</h2>

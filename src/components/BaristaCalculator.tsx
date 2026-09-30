@@ -3,6 +3,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { DEFAULT_BARISTA_INPUTS, BaristaInputs, fmtUSD, projectBarista } from "@/lib/coastfire";
 import { drawBaristaChart } from "@/lib/chart";
+import { ScenarioRow } from "@/lib/types";
+import { useScenarioSave } from "@/lib/useScenarioSave";
+import { ScenarioSaveRow, SavedScenariosList } from "@/components/ScenarioSaveBlock";
+import { formatHeadline } from "@/lib/scenarioDisplay";
 
 const FIELD_DEFS: {
   key: keyof BaristaInputs;
@@ -30,13 +34,31 @@ const FIELD_DEFS: {
 
 export default function BaristaCalculator({
   initialInputs = DEFAULT_BARISTA_INPUTS,
+  isSignedIn = false,
 }: {
   initialInputs?: BaristaInputs;
+  isSignedIn?: boolean;
 }) {
   const [vals, setVals] = useState<BaristaInputs>(initialInputs);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const result = useMemo(() => projectBarista(vals), [vals]);
+
+  const {
+    scenarioName,
+    setScenarioName,
+    saveState,
+    saveError,
+    saved,
+    loadingSaved,
+    handleSave,
+    handleDelete,
+  } = useScenarioSave({
+    calculatorType: "barista",
+    isSignedIn,
+    inputs: vals,
+    headlineValue: result.projectedBalanceAtRetirement,
+  });
 
   useEffect(() => {
     if (canvasRef.current) drawBaristaChart(canvasRef.current, result, vals.currentAge);
@@ -50,6 +72,12 @@ export default function BaristaCalculator({
   function updateField(key: keyof BaristaInputs, raw: string) {
     const parsed = parseFloat(raw);
     setVals((prev) => ({ ...prev, [key]: Number.isNaN(parsed) ? 0 : parsed }));
+  }
+
+  function handleLoad(scenario: ScenarioRow) {
+    setVals(scenario.inputs as BaristaInputs);
+    setScenarioName(scenario.name);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   let statusClass = "pending";
@@ -155,8 +183,26 @@ export default function BaristaCalculator({
               Full-retirement target
             </div>
           </div>
+
+          <ScenarioSaveRow
+            isSignedIn={isSignedIn}
+            scenarioName={scenarioName}
+            setScenarioName={setScenarioName}
+            saveState={saveState}
+            saveError={saveError}
+            onSave={handleSave}
+          />
         </div>
       </div>
+
+      <SavedScenariosList
+        isSignedIn={isSignedIn}
+        saved={saved}
+        loadingSaved={loadingSaved}
+        formatMeta={formatHeadline}
+        onLoad={handleLoad}
+        onDelete={handleDelete}
+      />
 
       <p className="foot-note">
         Estimates only, based on a constant annual return and constant withdrawals — real markets

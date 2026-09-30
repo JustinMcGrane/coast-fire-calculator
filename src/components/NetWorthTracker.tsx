@@ -3,16 +3,16 @@
 import { useEffect, useRef, useState } from "react";
 import { project, fmtUSD } from "@/lib/coastfire";
 import { drawActualVsProjected } from "@/lib/chartExtra";
-import { ScenarioRow, NetWorthCheckinRow } from "@/lib/types";
+import { CoastScenarioRow, NetWorthCheckinRow } from "@/lib/types";
 
-function ageAtDate(scenario: ScenarioRow, dateStr: string): number {
+function ageAtDate(scenario: CoastScenarioRow, dateStr: string): number {
   const start = new Date(scenario.created_at).getTime();
   const at = new Date(dateStr).getTime();
   const yearsElapsed = (at - start) / (1000 * 60 * 60 * 24 * 365.25);
   return scenario.inputs.currentAge + yearsElapsed;
 }
 
-export default function NetWorthTracker({ scenarios }: { scenarios: ScenarioRow[] }) {
+export default function NetWorthTracker({ scenarios }: { scenarios: CoastScenarioRow[] }) {
   const [scenarioId, setScenarioId] = useState(scenarios[0]?.id);
   const [checkins, setCheckins] = useState<NetWorthCheckinRow[]>([]);
   const [balance, setBalance] = useState("");

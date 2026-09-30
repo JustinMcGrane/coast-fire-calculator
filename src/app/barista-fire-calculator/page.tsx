@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import BaristaCalculator from "@/components/BaristaCalculator";
 import Faq from "@/components/Faq";
 import { fmtUSD } from "@/lib/coastfire";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Barista FIRE Calculator — Bridge to Full Retirement",
@@ -41,7 +42,12 @@ const faqItems = [
   },
 ];
 
-export default function BaristaFireCalculatorPage() {
+export default async function BaristaFireCalculatorPage() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <>
       <Hero
@@ -51,7 +57,7 @@ export default function BaristaFireCalculatorPage() {
         suffix=""
         subhead="See if part-time income plus a partial withdrawal from your savings still gets you to your full retirement number — free, unlimited, no account required."
       />
-      <BaristaCalculator />
+      <BaristaCalculator isSignedIn={!!user} />
 
       <div className="content-section">
         <h2>How this calculator works</h2>

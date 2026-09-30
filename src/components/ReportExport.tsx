@@ -2,9 +2,9 @@
 
 import { useMemo, useState } from "react";
 import { project, fmtUSD } from "@/lib/coastfire";
-import { ScenarioRow } from "@/lib/types";
+import { CoastScenarioRow } from "@/lib/types";
 
-export default function ReportExport({ scenarios }: { scenarios: ScenarioRow[] }) {
+export default function ReportExport({ scenarios }: { scenarios: CoastScenarioRow[] }) {
   const [scenarioId, setScenarioId] = useState(scenarios[0]?.id);
   const scenario = scenarios.find((s) => s.id === scenarioId);
   const result = useMemo(() => (scenario ? project(scenario.inputs) : null), [scenario]);

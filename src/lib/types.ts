@@ -1,12 +1,23 @@
-import { CoastInputs } from "./coastfire";
+import { BaristaInputs, CoastInputs, FiInputs, LongevityInputs } from "./coastfire";
+
+export type CalculatorType = "coast" | "fire" | "longevity" | "barista";
 
 export interface ScenarioRow {
   id: string;
   user_id: string;
   name: string;
-  inputs: CoastInputs;
-  coast_number_today: number;
+  calculator_type: CalculatorType;
+  inputs: CoastInputs | FiInputs | LongevityInputs | BaristaInputs;
+  headline_value: number | null;
   created_at: string;
+}
+
+// The comparison/net-worth/Monte Carlo/PDF tools only ever operate on Coast
+// FIRE scenarios (they call project(), which expects CoastInputs) — this
+// narrows ScenarioRow for callers that have already filtered to
+// calculator_type === "coast".
+export interface CoastScenarioRow extends Omit<ScenarioRow, "inputs"> {
+  inputs: CoastInputs;
 }
 
 export interface NetWorthCheckinRow {

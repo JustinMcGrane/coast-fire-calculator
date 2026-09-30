@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { project, fmtUSD } from "@/lib/coastfire";
-import { ScenarioRow } from "@/lib/types";
+import { CoastScenarioRow } from "@/lib/types";
 
-export default function ScenarioComparison({ scenarios }: { scenarios: ScenarioRow[] }) {
+export default function ScenarioComparison({ scenarios }: { scenarios: CoastScenarioRow[] }) {
   const [selected, setSelected] = useState<string[]>(scenarios.slice(0, 3).map((s) => s.id));
 
   function toggle(id: string) {
