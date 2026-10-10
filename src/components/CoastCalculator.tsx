@@ -164,7 +164,13 @@ export default function CoastCalculator({
           <div className="big-number-label">what you need invested today to coast the rest of the way</div>
           <div className="status-copy">{statusCopy}</div>
 
-          <canvas ref={canvasRef} width={600} height={260}></canvas>
+          <canvas
+            ref={canvasRef}
+            width={600}
+            height={260}
+            role="img"
+            aria-label="Chart comparing your projected savings if you keep contributing versus if you coast, against your retirement target"
+          ></canvas>
           <div className="legend">
             <div className="legend-item">
               <span className="legend-swatch" style={{ background: "var(--teal)" }}></span>

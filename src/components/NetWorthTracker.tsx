@@ -107,7 +107,13 @@ export default function NetWorthTracker({ scenarios }: { scenarios: CoastScenari
         </select>
       </div>
 
-      <canvas ref={canvasRef} width={600} height={260}></canvas>
+      <canvas
+        ref={canvasRef}
+        width={600}
+        height={260}
+        role="img"
+        aria-label="Chart comparing your actual net worth check-ins against the originally projected trajectory"
+      ></canvas>
       <div className="legend">
         <div className="legend-item">
           <span

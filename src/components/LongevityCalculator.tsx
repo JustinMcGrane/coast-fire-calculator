@@ -149,7 +149,13 @@ export default function LongevityCalculator({
           </div>
           <div className="status-copy">{statusCopy}</div>
 
-          <canvas ref={canvasRef} width={600} height={260}></canvas>
+          <canvas
+            ref={canvasRef}
+            width={600}
+            height={260}
+            role="img"
+            aria-label="Chart showing your projected savings balance over time as you withdraw from it in retirement"
+          ></canvas>
           <div className="legend">
             <div className="legend-item">
               <span className="legend-swatch" style={{ background: "var(--gold)" }}></span>

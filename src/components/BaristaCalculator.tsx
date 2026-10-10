@@ -166,7 +166,13 @@ export default function BaristaCalculator({
           <div className="big-number-label">projected balance at your full-retirement age</div>
           <div className="status-copy">{statusCopy}</div>
 
-          <canvas ref={canvasRef} width={600} height={260}></canvas>
+          <canvas
+            ref={canvasRef}
+            width={600}
+            height={260}
+            role="img"
+            aria-label="Chart showing your projected savings balance over time under a Barista FIRE partial-withdrawal plan"
+          ></canvas>
           <div className="legend">
             <div className="legend-item">
               <span

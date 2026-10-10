@@ -159,7 +159,13 @@ export default function FireCalculator({
           <div className="big-number-label">the age you reach financial independence</div>
           <div className="status-copy">{statusCopy}</div>
 
-          <canvas ref={canvasRef} width={600} height={260}></canvas>
+          <canvas
+            ref={canvasRef}
+            width={600}
+            height={260}
+            role="img"
+            aria-label="Chart showing your projected savings balance over time toward your financial independence number"
+          ></canvas>
           <div className="legend">
             <div className="legend-item">
               <span className="legend-swatch" style={{ background: "var(--gold)" }}></span>

@@ -77,7 +77,13 @@ export default function MonteCarloView({ scenarios }: { scenarios: CoastScenario
         </div>
       </div>
 
-      <canvas ref={canvasRef} width={600} height={280}></canvas>
+      <canvas
+        ref={canvasRef}
+        width={600}
+        height={280}
+        role="img"
+        aria-label="Chart showing a probability band of simulated outcomes for this scenario, from 10th to 90th percentile"
+      ></canvas>
       <div className="legend">
         <div className="legend-item">
           <span className="legend-swatch" style={{ background: "var(--gold)" }}></span>
